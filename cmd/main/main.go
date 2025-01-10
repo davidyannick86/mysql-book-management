@@ -1,9 +1,17 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/davidyannick86/mysql-book-management/pkg/routes"
+	"github.com/gorilla/mux"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	r := mux.NewRouter()
+	routes.RegisterBookStoreRoutes(r)
+	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe("127.0.0.1:8090", nil))
 }
