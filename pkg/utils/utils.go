@@ -2,12 +2,8 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
-	"log"
 	"net/http"
-
-	"github.com/jinzhu/gorm"
 )
 
 // * Parse the request body

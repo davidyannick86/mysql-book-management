@@ -11,7 +11,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// * Test the database connection
 func testDBConnection() {
 	// * Define the connection string
 	dsn := "root:password@tcp(localhost:3306)/mysqldb?charset=utf8mb4&parseTime=True&loc=Local"
