@@ -1,0 +1,42 @@
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Go build and test cache
+/vendor/
+/Godeps/
+.go/
+
+# MySQL
+*.mdb
+*.ldb
+*.sql
+*.dump
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# Binary output directory
+/bin/
+/debug/
+
+# Environment variables
+.env
