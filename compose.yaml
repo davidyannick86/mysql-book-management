@@ -5,7 +5,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: mysqldb
-      MYSQL_USER: david
-      MYSQL_PASSWORD: password # Add this line
+    env_file:
+      - .env
     ports:
       - "3306:3306"
