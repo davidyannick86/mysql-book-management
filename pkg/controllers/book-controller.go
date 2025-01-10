@@ -1,22 +1,18 @@
 package controllers
 
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
 
-func CreateBook(w http.ResponseWriter, r *http.Request) {
+	"github.com/davidyannick86/mysql-book-management/pkg/models"
+)
 
-}
+var NewBook models.Book
 
 func GetBooks(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func GetBookById(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func UpdateBook(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func DeleteBook(w http.ResponseWriter, r *http.Request) {
+	newBooks := models.GetAllBooks()
+	res, _ := json.Marshal(newBooks)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
 }
