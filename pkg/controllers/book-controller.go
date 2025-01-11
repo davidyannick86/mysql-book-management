@@ -68,3 +68,24 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	w.Write(res)
 }
+
+// * Delete a book
+func DeleteBook(w http.ResponseWriter, r *http.Request) {
+	//* Get the book ID from the request
+	vars := mux.Vars(r)
+
+	// * Convert the book ID to an integer
+	bookId := vars["bookId"]
+	Id, err := strconv.ParseInt(bookId, 0, 0)
+	if err != nil {
+		fmt.Println()
+		return
+	}
+	book := models.DeleteBook(Id)
+
+	// * Convert the book to json and write the response
+	res, _ := json.Marshal(book)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
+}
