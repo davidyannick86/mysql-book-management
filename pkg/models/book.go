@@ -14,51 +14,32 @@ type Book struct {
 	Publication string `json:"publication"`
 }
 
-// * Initialize the database connection
 func init() {
 	config.Connect()
 	db = config.GetDB()
 	db.AutoMigrate(&Book{})
 }
 
-// * Create a new book
 func (b *Book) CreateBook() *Book {
-
-	// * Create a new record
 	db.NewRecord(b)
 	db.Create(&b)
 	return b
 }
 
-// * Get all books
 func GetAllBooks() []Book {
-
-	// * Get all books
 	var Books []Book
-
-	// * Find all books
 	db.Find(&Books)
-
-	// * Return all books
 	return Books
 }
 
-// * Get a book by its ID
 func GetBookById(Id int64) (*Book, *gorm.DB) {
-
-	// * Get a book by its ID
 	var getBook Book
-
-	// * Find the book by its ID
-	db := db.Where("ID = ?", Id).Find(&getBook)
-
-	// * Return the book
+	db := db.Where("ID=?", Id).Find(&getBook)
 	return &getBook, db
 }
 
-// * Delete a book
-func DeleteBook(Id int64) Book {
+func DeleteBook(ID int64) Book {
 	var book Book
-	db.Where("ID = ?", Id).Delete(book)
+	db.Where("ID=?", ID).Delete(book)
 	return book
 }

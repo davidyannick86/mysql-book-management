@@ -3,7 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -11,18 +11,12 @@ import (
 )
 
 // * Parse the request body
-func ParseBody(r *http.Request, model interface{}) error {
-	// * Read the request body
-	body, err := io.ReadAll(r.Body)
-	if err != nil {
-		return err
+func ParseBody(r *http.Request, x interface{}) {
+	if body, err := ioutil.ReadAll(r.Body); err == nil {
+		if err := json.Unmarshal([]byte(body), x); err != nil {
+			return
+		}
 	}
-
-	// * Unmarshal the request body
-	if err := json.Unmarshal([]byte(body), model); err != nil {
-		return err
-	}
-	return nil
 }
 
 func TestDBConnection() {

@@ -10,16 +10,8 @@ import (
 )
 
 func main() {
-	// * Create a new router
 	r := mux.NewRouter()
-
-	// * Register the routes
 	routes.RegisterBookStoreRoutes(r)
-
-	// * Start the server
 	http.Handle("/", r)
-
-	// * Listen and serve
-	log.Fatal(http.ListenAndServe("0.0.0.0:9010", nil))
-	//utils.TestDBConnection()
+	log.Fatal(http.ListenAndServe("localhost:9010", r))
 }
