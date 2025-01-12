@@ -1,3 +1,4 @@
+# Builder
 FROM golang:1.23.4-bullseye AS builder
 
 WORKDIR /app
@@ -9,7 +10,7 @@ RUN go mod download
 
 COPY . .
 
-
+# Production
 RUN go build -o main ./cmd/main
 
 FROM debian:bookworm-slim
@@ -20,4 +21,4 @@ COPY --from=builder /app/main .
 
 EXPOSE 9010
 
-#CMD ["./main"]
+CMD ["./main"]

@@ -8,7 +8,12 @@ services:
       - "3306:3306"
     volumes:
       - ./mysqldata:/var/lib/mysql
-
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 55
   app:
     build:
       context: .
@@ -16,5 +21,8 @@ services:
     ports:
       - "9010:9010"
     command: ./main
-    depends_on:
+    links:
       - db
+    depends_on:
+      db:
+        condition: service_healthy
